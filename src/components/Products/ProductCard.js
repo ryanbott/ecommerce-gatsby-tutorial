@@ -22,6 +22,7 @@ const ProductCard = class extends React.Component {
       items: [{ sku, quantity }],
       successUrl: `${window.location.origin}/page-2/`,
       cancelUrl: `${window.location.origin}/advanced`,
+      billingAddressCollection: 'required',
     })
 
     console.log(event, sku.id)
