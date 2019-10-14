@@ -13,7 +13,8 @@ const cardStyles = {
   maxWidth: '300px',
 }
 const buttonStyles = {
-  fontSize: '13px',
+  cursor: 'pointer',
+  fontSize: '1rem',
   textAlign: 'center',
   color: '#fff',
   outline: 'none',

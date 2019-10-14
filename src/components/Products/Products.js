@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { graphql, StaticQuery } from 'gatsby'
-import SkuCard from './SkuCard'
+import ProductCard from './ProductCard'
 
 const conatinerStyles = {
   display: 'flex',
@@ -10,7 +10,7 @@ const conatinerStyles = {
   padding: '1rem 0 1rem 0',
 }
 
-class Skus extends Component {
+class Products extends Component {
   state = {
     stripe: null,
   }
@@ -27,7 +27,7 @@ class Skus extends Component {
     return (
       <StaticQuery
         query={graphql`
-          query AllSkus {
+          query AllProducts {
             skus: allStripeSku {
               edges {
                 node {
@@ -45,7 +45,7 @@ class Skus extends Component {
                 }
               }
             }
-            allStripeProduct(sort: {fields: id}) {
+            products: allStripeProduct(sort: {fields: id}) {
               edges {
                 node {
                   name
@@ -59,15 +59,20 @@ class Skus extends Component {
             }
           }
         `}
-        render={({ skus }) => (
+        render={({ products, skus }) => (
           <div style={conatinerStyles}>
-            {skus.edges.map(({ node: sku }) => (
-              <SkuCard
-                key={sku.id}
-                sku={sku}
-                stripe={this.state.stripe}
-              />
-            ))}
+            {products.edges.map(({ node: product }) => {
+
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  skus={skus}
+                  stripe={this.state.stripe}
+                />
+              )
+
+            })}
           </div>
         )}
       />
@@ -75,4 +80,4 @@ class Skus extends Component {
   }
 }
 
-export default Skus
+export default Products
